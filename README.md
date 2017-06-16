@@ -1,0 +1,2 @@
+# RegularizedNonlinearAcceleration
+Implementation of the Regularized Nonlinear Acceleration algorithm
