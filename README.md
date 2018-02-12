@@ -1,6 +1,9 @@
 # RegularizedNonlinearAcceleration
 Implementation of the Regularized Nonlinear Acceleration algorithm
 
+# Coming soon:
+RNA implementation in Python2 for PyTorch.
+
 # Related Papers
 - D. Scieur, A. d'Aspremont and F. Bach. Regularized Nonlinear Acceleration.
 - D. Scieur, A. d'Aspremont and F. Bach. Nonlinear Acceleration of Stochastic Algorithms.
