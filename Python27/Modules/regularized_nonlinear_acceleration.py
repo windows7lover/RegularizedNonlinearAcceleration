@@ -8,9 +8,6 @@ Created on Wed Apr 19 17:45:57 2017
 
 import numpy as np
 from numpy import linalg as LA
-# import matplotlib.pyplot as plt
-# import time
-
 
 def determine_agressive(X):
     R = np.diff(np.asmatrix(X));
@@ -210,86 +207,3 @@ def adaptive_rna(X,obj_fun,logrange=[-15,1],eigenval_offset = 0):
     # the step size.
     x_extr = np.reshape(x_extr,(d,1))
     return x_extr,c
-   
-#def test():
-#    # Test of adaptive_rna on a quadratic function
-#    
-#    # function Parameters
-#    d = 100;
-#    L = 10.0;
-#    mu = 0.001;
-#    
-#    # Create a quadratic minimization problem: min 0.5*||A*(x-xstar)||
-#    # We build A so that mu*I <= A'*A <= L*I
-#    A = np.random.rand(d,d);
-#    AA = np.dot(np.transpose(A),A);
-#    AA = AA/LA.norm(AA);
-#    AA = (L-mu)*AA+mu*np.eye(d); # L control the smoothness parameter, 
-#                                 # and mu the strong convexity
-#    
-#    # Random initialization and solution 
-#    x0 = np.random.rand(d,1);
-#    xstar = np.random.rand(d,1);
-#    
-#    # Define the gradient of the function
-#    grad = lambda x: np.dot(AA,x-xstar);
-#    
-#    # We want to minimize the error, or the norm of the gradient
-#    err = lambda x: LA.norm(grad(x))
-#        
-#    
-#    # Total number of calls : k*nLoop 
-#    nLoop = 1000;
-#    k = 5;
-#    x_hist = np.zeros((d,k+1));
-#    
-#    # Record the error of accelerated gradient
-#    err_vec_rna = np.zeros((nLoop+1,1));
-#    err_vec_rna[0,0] = err(x0);
-#    
-#    # Record the error of gradient method
-#    err_vec_grad = np.zeros((nLoop+1,1));
-#    err_vec_grad[0,0] = err(x0);
-#    
-#    
-#    # accelerated gradient method
-#    start = time.time()
-#    x_new = x0;
-#    for i in range(0,nLoop):
-#        x_hist[:,:1] = x_new; # Restart at extrapolated point
-#        x = x_new;
-#        # Perform k gradient steps
-#        for j in range(1,k+1):
-#            x = x-(1/L)*grad(x); 
-#            x_hist[:,j] = x[:,0];
-#        # Adaptive regularization, using only k gradient steps
-#        (x_new,c,t) = adaptive_rna(x_hist,err)
-#        # Store the error of the extrapolation
-#        err_vec_rna[i+1,0] = err(x_new);
-#    stop = time.time()
-#    time_acc = stop-start;
-#    
-#    
-#    # classical gradient method
-#    start = time.time()
-#    x_plus = x0;
-#    for i in range(0,nLoop):
-#        for j in range(1,k+1):
-#            x_plus = x_plus-(1/L)*grad(x_plus);
-#        err_vec_grad[i+1,0] = err(x_plus);
-#    stop = time.time()
-#    time_grad = stop-start;
-#    
-#    
-#    iterates = range(0,nLoop+1);
-#    grad_plot, = plt.semilogy(iterates, err_vec_grad, 'b', label='Gradient descend')
-#    acc_grad_plot, = plt.semilogy(iterates, err_vec_rna, 'r', label='Reg. Nonlinear Acceleration on gradient')
-#    plt.legend()
-#    plt.show()
-#    print('Time taken (gradient / acceleration of gradient)')
-#    print((time_grad,time_acc))
-
-
-    
-#test_cnn()
-# test()
