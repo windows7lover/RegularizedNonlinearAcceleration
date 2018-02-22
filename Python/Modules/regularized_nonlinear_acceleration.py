@@ -32,7 +32,7 @@ def rna(X,reg=0):
     # Recovers parameters, ensure X is a matrix
     (d,k) = np.shape(X);
     k = k-1;
-    X = np.asmatrix(X);
+    X = np.asmatrix(X); # check if necessary
     
     # Compute the matrix of residuals
     R = np.diff(X);
@@ -47,8 +47,6 @@ def rna(X,reg=0):
     
     # Compute the extrapolation / weigthed mean  "sum_i c_i x_i", and return
     return extr,c
-
-
 
 
 def min_eignevalRR(X):

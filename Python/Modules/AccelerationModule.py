@@ -23,41 +23,38 @@ class AccelerationModule:
         self.store_each = store_each
         
         if(self.cont_type == "state_dict"):
-            for key in model.state_dict().keys():
+            for key in model.state_dict().keys(): # check if it works without keys()
                 param = model.state_dict()[key]
                 param_np = param.cpu().numpy()
                 self.input_shape[key] = (param_np.shape,param_np.size)
-                pass
-            pass
-        
+                
         if(self.cont_type == "parameters"):
             key = 0
             for param in model.parameters():
                 data_np = param.data.cpu().numpy()
                 self.input_shape[key] = (data_np.shape,data_np.size)
                 key+=1
-                pass
-            pass
-        pass
-        
+                
+                
     def extract_x(self,model):
         new_x = []
         if(self.cont_type == "state_dict"):
             for key in self.input_shape.keys():
                 param = model.state_dict()[key].cpu().numpy().ravel()
                 new_x.append(param)
-                pass
+                
             new_x_cat = np.array(np.concatenate(new_x))
-            pass
+            
         
         if(self.cont_type == "parameters"):
             for param in model.parameters():
                 param_np = param.data.cpu().numpy().ravel()
                 new_x.append(param_np)
-                pass
+                
             new_x_cat =  np.array(np.concatenate())
-            pass
+            
         return new_x_cat
+        
         
     def store(self,model):
         self.store_counter += 1;
@@ -68,12 +65,10 @@ class AccelerationModule:
         
         if(len(self.x_hist)>(self.K+1)): # with this, len(x_hist) < K
             self.x_hist.pop(0)
-            pass
+            
         
         self.x_hist.append(self.extract_x(model))
-        pass
-    
-    
+        
     
     def load_param_in_model(self,x,model,x0=None,step_size=1):
         first_idx = 0
@@ -87,13 +82,10 @@ class AccelerationModule:
                     newEntry = x[first_idx:last_idx].reshape(shape)
                 else:
                     newEntry = (1-step_size)*x0[first_idx:last_idx].reshape(shape) + step_size*x[first_idx:last_idx].reshape(shape)
-                new_state_dict[key].copy_(torch.Tensor(newEntry)) #= torch.cuda.FloatTensor(newEntry)
+                new_state_dict[key].copy_(torch.Tensor(newEntry))
                 first_idx = last_idx
-                pass
+                
 
-            #model.load_state_dict(new_state_dict)
-            pass
-            
         if(self.cont_type == "parameters"):
             key = 0
             for param in model.parameters():
@@ -106,9 +98,7 @@ class AccelerationModule:
                 param.data = torch.cuda.FloatTensor(newEntry)
                 first_idx = last_idx
                 key += 1
-                pass
-            pass
-        
+                
         
     def min_eigenval(self):
         x_hist_np=np.array(self.x_hist).transpose()
@@ -137,4 +127,4 @@ class AccelerationModule:
             self.load_param_in_model(x_acc,model,self.x_hist[-1],step_size)
         
         return c
-        pass
+        
