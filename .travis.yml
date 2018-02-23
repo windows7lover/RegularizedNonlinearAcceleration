@@ -15,4 +15,4 @@ install:
 
 script:
   - python --version
-  - cd Python27/Example/mnist && python train_mnist.py --epochs 2
+  - cd Python/Example/mnist && python train_mnist.py --epochs 4
