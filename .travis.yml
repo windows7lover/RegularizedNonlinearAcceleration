@@ -1,0 +1,18 @@
+language: python
+
+env:
+  global:
+    - CONDA_DEPENDENCIES="pytorch torchvision"
+
+matrix:
+  include:
+    - env: PYTHON_VERSION=2.7
+    - env: PYTHON_VERSION=3.6
+
+install:
+  - git clone --depth 1 git://github.com/astropy/ci-helpers.git
+  - source ci-helpers/travis/setup_conda.sh
+
+script:
+  - python --version
+  - cd Python/Example/mnist && python train_mnist.py --epochs 4
