@@ -101,4 +101,4 @@ ENV/
 .mypy_cache/
 
 # data pytorch
-Python27/data/*
+Python/data/*
