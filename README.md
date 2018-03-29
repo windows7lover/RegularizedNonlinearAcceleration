@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/windows7lover/RegularizedNonlinearAcceleration.svg?branch=master)](https://travis-ci.org/windows7lover/RegularizedNonlinearAcceleration)
+
 # RegularizedNonlinearAcceleration
 Implementation of the Regularized Nonlinear Acceleration algorithm in Matlab and Python.
 
