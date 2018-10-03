@@ -196,12 +196,6 @@ def lr_scheduler(max_epoch,lr_0,lr_final,epoch):
 
 weight_decay=1e-5
 
-if(acceleration_type == 'offline'):
-    net2 = deepcopy(net)
-else:
-    net2 = net
-
-
 if(args.optimizer == 'sgd'):
     acceleration_type = 'none'
     lr_0 = 1
@@ -237,6 +231,11 @@ if(args.optimizer == 'orna_sgd_momentum'):
     lr_0 = 0.1
     lr_final = 0.001
     momentum = 0.9
+
+if(acceleration_type == 'offline'):
+    net2 = deepcopy(net)
+else:
+    net2 = net
 	
 log_filename = arch + '_' + args.optimizer
 if(do_average):
