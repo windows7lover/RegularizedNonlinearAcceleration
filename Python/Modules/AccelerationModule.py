@@ -63,7 +63,7 @@ class AccelerationModule:
         else:
             return # don't store
         
-        if(len(self.x_hist)>(self.K+1)): # with this, len(x_hist) < K
+        if(len(self.x_hist)>(self.K)): # with this, len(x_hist) < K+1, so number of coeffs < K
             self.x_hist.pop(0)
             
         
