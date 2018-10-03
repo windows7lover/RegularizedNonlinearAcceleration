@@ -35,6 +35,7 @@ parser.add_argument('--path_to_log', default=None, type=str)
 parser.add_argument('--data_path', default='', type=str)
 parser.add_argument('--arch', default='resnet18', type=str)
 parser.add_argument('--max_epoch', default='100', type=int)
+parser.add_argument('--stabilization', default='10', type=int)
 parser.add_argument('--optimizer', default='orna', type=str)
 parser.add_argument('--eval_train_error', default='n', type=str) # n or y
 parser.add_argument('--do_average', default='n', type=str) # n or y
@@ -197,7 +198,7 @@ def print_stats(stats_net1,stats_net2,epoch):
     print(' ')
 
 def lr_scheduler(max_epoch,lr_0,lr_final,epoch):
-    epoch_stabilization = 10;
+    epoch_stabilization = args.stabilization;
     if(epoch<max_epoch-epoch_stabilization):
         lr = lr_final + (lr_0-lr_final)*(1-(1.0*epoch/(1.0*(max_epoch-epoch_stabilization-1))))
     else:
