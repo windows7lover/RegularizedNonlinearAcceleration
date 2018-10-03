@@ -36,12 +36,23 @@ parser.add_argument('--data_path', default='', type=str)
 parser.add_argument('--arch', default='resnet18', type=str)
 parser.add_argument('--max_epoch', default='100', type=int)
 parser.add_argument('--optimizer', default='orna', type=str)
-parser.add_argument('--eval_train_error', default=False, type=bool)
-parser.add_argument('--do_average', default=False, type=bool)
+parser.add_argument('--eval_train_error', default='n', type=str) # n or y
+parser.add_argument('--do_average', default='n', type=str) # n or y
 args = parser.parse_args()
 
 if(args.data_path == ''):
     raise Exception('Argument data_path should not be empty.')
+
+# To be fixed, later...
+if(args.eval_train_error == 'n')
+    eval_train_error = False
+if(args.eval_train_error == 'y')
+    eval_train_error = True
+
+if(args.do_average == 'n')
+    do_average = False
+if(args.do_average == 'y')
+    do_average = True
 
 use_cuda = torch.cuda.is_available()
 
@@ -238,16 +249,16 @@ else:
     net2 = net
 	
 log_filename = arch + '_' + args.optimizer
-if(args.do_average):
+if(do_average):
     log_filename = log_filename + '_average'
 log_filename = log_filename + '_' + str(args.max_epoch)
     
 
 new_lr = lr_scheduler(args.max_epoch,lr_0,lr_final,0)
-optimizer = online_rna.online_rna(net.parameters(),lr=new_lr,momentum=momentum,weight_decay=weight_decay,nesterov=False,K=args.K,reg_acc=0,acceleration_type=acceleration_type,do_average=args.do_average)
+optimizer = online_rna.online_rna(net.parameters(),lr=new_lr,momentum=momentum,weight_decay=weight_decay,nesterov=False,K=args.K,reg_acc=0,acceleration_type=acceleration_type,do_average=do_average)
 
 
-test_train = args.eval_train_error; # compute loss and accuracy on the train set
+test_train = eval_train_error; # compute loss and accuracy on the train set
 
 for epoch in range(0, args.max_epoch ):
     
