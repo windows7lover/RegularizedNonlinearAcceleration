@@ -238,7 +238,7 @@ else:
     net2 = net
 	
 log_filename = arch + '_' + args.optimizer
-if(do_average):
+if(args.do_average):
     log_filename = log_filename + '_average'
 log_filename = log_filename + '_' + str(args.max_epoch)
     
