@@ -246,13 +246,14 @@ log_filename = log_filename + '_' + str(args.max_epoch)
 new_lr = lr_scheduler(args.max_epoch,lr_0,lr_final,0)
 optimizer = online_rna.online_rna(net.parameters(),lr=new_lr,momentum=momentum,weight_decay=weight_decay,nesterov=False,K=args.K,reg_acc=0,acceleration_type=acceleration_type,do_average=args.do_average)
 
+
+test_train = args.eval_train_error; # compute loss and accuracy on the train set
+
 for epoch in range(0, args.max_epoch ):
     
     # Schedule
     new_lr = lr_scheduler(args.max_epoch,lr_0,lr_final,epoch)
     optimizer.update_lr(new_lr)
-        
-    test_train = args.eval_train_error; # compute loss and accuracy on the train set
     
     print('\n\n########### EPOCH: ' +str(epoch) + ' WITH LEARNING RATE: ' +str(new_lr)+'\n\n')
     train(epoch)

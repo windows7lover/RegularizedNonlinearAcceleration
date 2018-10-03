@@ -167,7 +167,7 @@ class online_rna(SGD):
         c_vec = self.compute_c_rna()
 
         if(self.do_average):
-            k = len(c_vec_temp)
+            k = len(c_vec)
             z = np.ones(k)
             c_vec = (z/np.sum(z)).tolist()
         
