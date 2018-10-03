@@ -102,3 +102,6 @@ ENV/
 
 # data pytorch
 Python/data/*
+
+#gedit
+*.*~
