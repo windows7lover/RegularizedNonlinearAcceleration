@@ -36,7 +36,7 @@ parser.add_argument('--data_path', default='', type=str)
 parser.add_argument('--arch', default='resnet18', type=str)
 parser.add_argument('--max_epoch', default='100', type=int)
 parser.add_argument('--stabilization', default='10', type=int)
-parser.add_argument('--optimizer', default='orna', type=str)
+parser.add_argument('--optimizer', default='orna_sgd', type=str)
 parser.add_argument('--eval_train_error', default='n', type=str) # n or y
 parser.add_argument('--do_average', default='n', type=str) # n or y
 args = parser.parse_args()
