@@ -45,14 +45,14 @@ if(args.data_path == ''):
     raise Exception('Argument data_path should not be empty.')
 
 # To be fixed, later...
-if(args.eval_train_error == 'n')
+if(args.eval_train_error == 'n'):
     eval_train_error = False
-if(args.eval_train_error == 'y')
+if(args.eval_train_error == 'y'):
     eval_train_error = True
 
-if(args.do_average == 'n')
+if(args.do_average == 'n'):
     do_average = False
-if(args.do_average == 'y')
+if(args.do_average == 'y'):
     do_average = True
 
 use_cuda = torch.cuda.is_available()
